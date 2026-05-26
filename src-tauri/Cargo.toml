@@ -1,6 +1,6 @@
 [package]
 name = "dogpet"
-version = "1.1.0"
+version = "1.1.1"
 description = "A custom image-frame desktop pet"
 authors = [ "yangpanyi" ]
 edition = "2024"
