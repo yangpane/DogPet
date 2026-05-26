@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BongoCat</title>
+    <title>DogPet</title>
     <link rel="icon" href="/favicon.ico" />
     <script src="/js/live2dcubismcore.min.js"></script>
     <script src="/js/live2d.min.js"></script>
@@ -11,6 +11,23 @@
 
   <body>
     <div id="app"></div>
+    <script>
+      window.addEventListener('error', (event) => {
+        const app = document.querySelector('#app')
+
+        if (!app || app.children.length) return
+
+        app.innerHTML = `<pre style="padding:16px;white-space:pre-wrap;color:#b42318;font:13px/1.5 ui-monospace,monospace;">${event.message}</pre>`
+      })
+
+      window.addEventListener('unhandledrejection', (event) => {
+        const app = document.querySelector('#app')
+
+        if (!app || app.children.length) return
+
+        app.innerHTML = `<pre style="padding:16px;white-space:pre-wrap;color:#b42318;font:13px/1.5 ui-monospace,monospace;">${event.reason}</pre>`
+      })
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

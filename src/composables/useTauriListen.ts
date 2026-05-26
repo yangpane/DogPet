@@ -6,6 +6,8 @@ export function useTauriListen<T>(...args: Parameters<typeof listen<T>>) {
   const unlisten = ref(noop)
 
   onMounted(async () => {
+    if (!('__TAURI_INTERNALS__' in window)) return
+
     unlisten.value = await listen<T>(...args)
   })
 

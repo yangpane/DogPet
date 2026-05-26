@@ -1,0 +1,51 @@
+{
+  "name": "小狗打字测试素材包",
+  "version": 1,
+  "states": {
+    "idle": {
+      "id": "idle",
+      "frames": [],
+      "fps": 10,
+      "loop": true
+    },
+    "typing": {
+      "id": "typing",
+      "frames": [
+        "typing/001.png",
+        "typing/002.png",
+        "typing/003.png",
+        "typing/004.png",
+        "typing/005.png",
+        "typing/006.png",
+        "typing/007.png",
+        "typing/008.png"
+      ],
+      "fps": 10,
+      "loop": true
+    },
+    "click": {
+      "id": "click",
+      "frames": [],
+      "fps": 10,
+      "loop": false
+    },
+    "mouse": {
+      "id": "mouse",
+      "frames": [],
+      "fps": 10,
+      "loop": true
+    },
+    "sleep": {
+      "id": "sleep",
+      "frames": [],
+      "fps": 10,
+      "loop": true
+    },
+    "random": {
+      "id": "random",
+      "frames": [],
+      "fps": 10,
+      "loop": true
+    }
+  }
+}

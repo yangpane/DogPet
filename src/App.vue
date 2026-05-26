@@ -20,25 +20,39 @@ import { useAppStore } from './stores/app'
 import { useCatStore } from './stores/cat'
 import { useGeneralStore } from './stores/general'
 import { useModelStore } from './stores/model'
+import { usePetFrameStore } from './stores/petFrame'
 import { useShortcutStore } from './stores/shortcut.ts'
 
+const isTauriRuntime = '__TAURI_INTERNALS__' in window
 const appStore = useAppStore()
 const modelStore = useModelStore()
+const petFrameStore = usePetFrameStore()
 const catStore = useCatStore()
 const generalStore = useGeneralStore()
 const shortcutStore = useShortcutStore()
-const appWindow = getCurrentWebviewWindow()
+const appWindow = isTauriRuntime ? getCurrentWebviewWindow() : undefined
 const { isRestored, restoreState } = useWindowState()
 const { darkAlgorithm, defaultAlgorithm } = theme
 const { locale } = useI18n()
 
 onMounted(async () => {
+  if (!isTauriRuntime) {
+    appStore.name = 'DogPet'
+    generalStore.appearance.language ??= LANGUAGE.ZH_CN
+    location.hash = '#/preview'
+    isRestored.value = true
+
+    return
+  }
+
   await appStore.$tauri.start()
   await appStore.init()
   await modelStore.$tauri.start()
   await modelStore.init()
   await catStore.$tauri.start()
   catStore.init()
+  await petFrameStore.$tauri.start()
+  await petFrameStore.ensureDemoTypingFrames()
   await generalStore.$tauri.start()
   await generalStore.init()
   await shortcutStore.$tauri.start()
@@ -50,13 +64,13 @@ watch(() => generalStore.appearance.language, (value) => {
 })
 
 useTauriListen(LISTEN_KEY.SHOW_WINDOW, ({ payload }) => {
-  if (appWindow.label !== payload) return
+  if (!appWindow || appWindow.label !== payload) return
 
   showWindow()
 })
 
 useTauriListen(LISTEN_KEY.HIDE_WINDOW, ({ payload }) => {
-  if (appWindow.label !== payload) return
+  if (!appWindow || appWindow.label !== payload) return
 
   hideWindow()
 })
@@ -64,7 +78,11 @@ useTauriListen(LISTEN_KEY.HIDE_WINDOW, ({ payload }) => {
 useEventListener('unhandledrejection', ({ reason }) => {
   const message = isString(reason) ? reason : JSON.stringify(reason)
 
-  error(message)
+  if (isTauriRuntime) {
+    error(message)
+  } else {
+    console.error(message)
+  }
 })
 
 useEventListener('click', (event) => {
@@ -80,12 +98,19 @@ useEventListener('click', (event) => {
 
   if (!isURL(href)) return
 
-  openUrl(href)
+  if (isTauriRuntime) {
+    openUrl(href)
+  } else {
+    window.open(href, '_blank')
+  }
 })
 </script>
 
 <template>
+  <RouterView v-if="!isTauriRuntime" />
+
   <HappyProvider
+    v-else
     v-slot="{ wave }"
     enabled
   >

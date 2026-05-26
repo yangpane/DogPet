@@ -1,65 +1,36 @@
-# 下载指南
+# DogPet Download Guide
 
-## 系统要求
+## System Requirements
 
-- macOS 12 或更高版本。
-- Windows 10 或更高版本。
-- Linux 带有 X11 环境。
+- macOS 12 or later.
+- Windows 10 or later, 64-bit.
+
+Linux packaging may remain available from the underlying Tauri configuration, but DogPet v1 focuses on macOS and Windows.
 
 ## macOS
 
-### 手动下载
+- Apple Silicon: download the `DogPet_*_aarch64.dmg` asset from GitHub Releases.
+- Intel: download the `DogPet_*_x64.dmg` asset from GitHub Releases.
 
-- Apple Silicon：下载 `BongoCat_aarch64.dmg`
-- Intel Chip：下载 `BongoCat_x64.dmg`
+If macOS blocks the app because it is not notarized yet:
 
-### Homebrew 下载
-
-1. 添加 BongoCat 的 tap 源：
-
-```bash
-brew tap ayangweb/BongoCat
-```
-
-2. 安装：
-
-```bash
-brew install --no-quarantine bongo-cat
-```
-
-3. 更新：
-
-```bash
-brew upgrade bongo-cat
-```
-
-4. 卸载：
-
-```bash
-brew uninstall --cask bongo-cat
-
-brew untap ayangweb/BongoCat
-```
+1. Open System Settings.
+2. Go to Privacy & Security.
+3. Find the DogPet warning and choose Open Anyway.
+4. Grant Input Monitoring permission when prompted so DogPet can react to keyboard and mouse activity.
 
 ## Windows
 
-- 64 位系统：下载 `BongoCat_x64.exe`
-- 32 位系统：下载 `BongoCat_x86.exe`
-- ARM64 架构：下载 `BongoCat_arm64.exe`
+- 64-bit users should download the `DogPet_*_x64-setup.exe` or NSIS installer asset.
 
-## Linux(X11)
+If Microsoft Defender SmartScreen appears, choose More info -> Run anyway only when the installer came from the official DogPet release page.
 
-### 手动下载
+## Updates
 
-- 64 位系统：
-  - Debian / Ubuntu：下载 `BongoCat_amd64.deb`
-  - Fedora / RHEL：下载 `BongoCat_x86_64.rpm`
-  - 通用版本：下载 `BongoCat_amd64.AppImage`
-- ARM64 架构：
-  - Debian / Ubuntu：下载 `BongoCat_arm64.deb`
-  - Fedora / RHEL：下载 `BongoCat_aarch64.rpm`
-  - 通用版本：下载 `BongoCat_aarch64.AppImage`
+DogPet checks for updates from:
 
-### AUR 下载
+```text
+https://github.com/yangpane/DogPet/releases/latest/download/latest.json
+```
 
-- Manjaro / ArchLinux: `yay -S bongo-cat`
+Updater artifacts require the Tauri updater signing secrets configured in the GitHub repository.

@@ -2,17 +2,18 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import Main from '../pages/main/index.vue'
-import Preference from '../pages/preference/index.vue'
-
 const routes: Readonly<RouteRecordRaw[]> = [
   {
     path: '/',
-    component: Main,
+    component: () => import('../pages/main/index.vue'),
+  },
+  {
+    path: '/preview',
+    component: () => import('../pages/browser-preview/index.vue'),
   },
   {
     path: '/preference',
-    component: Preference,
+    component: () => import('../pages/preference/index.vue'),
   },
 ]
 

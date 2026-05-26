@@ -14,15 +14,16 @@ import { getCursorMonitor } from '@/utils/monitor'
 
 export type WindowState = Record<string, Partial<PhysicalPosition & PhysicalSize> | undefined>
 
-const appWindow = getCurrentWebviewWindow()
-const { label } = appWindow
-
 export function useWindowState() {
+  const appWindow = '__TAURI_INTERNALS__' in window ? getCurrentWebviewWindow() : undefined
+  const label = appWindow?.label ?? ''
   const appStore = useAppStore()
   const catStore = useCatStore()
   const isRestored = ref(false)
 
   onMounted(() => {
+    if (!appWindow) return
+
     appWindow.onMoved(onChange)
 
     appWindow.onResized(onChange)
@@ -31,6 +32,7 @@ export function useWindowState() {
   })
 
   const clampToMonitor = useDebounceFn(async () => {
+    if (!appWindow) return
     if (label !== WINDOW_LABEL.MAIN || !catStore.window.keepInScreen) return
 
     const monitor = await getCursorMonitor()
@@ -57,6 +59,8 @@ export function useWindowState() {
   watch(() => catStore.window.keepInScreen, clampToMonitor)
 
   const onChange = async (event: Event<PhysicalPosition | PhysicalSize>) => {
+    if (!appWindow) return
+
     const minimized = await appWindow.isMinimized()
 
     if (minimized) return
@@ -69,6 +73,12 @@ export function useWindowState() {
   }
 
   const restoreState = async () => {
+    if (!appWindow) {
+      isRestored.value = true
+
+      return
+    }
+
     const { x, y, width, height } = appStore.windowState[label] ?? {}
 
     if (isNumber(x) && isNumber(y)) {
@@ -88,8 +98,21 @@ export function useWindowState() {
       }
     }
 
-    if (width && height) {
+    const hasValidSize = isNumber(width) && isNumber(height) && width >= 80 && height >= 80
+
+    if (hasValidSize) {
       await appWindow.setSize(new PhysicalSize(width, height))
+    } else if (label === WINDOW_LABEL.MAIN) {
+      const monitor = (await availableMonitors())[0]
+
+      await appWindow.setSize(new PhysicalSize(320, 320))
+
+      if (monitor) {
+        await appWindow.setPosition(new PhysicalPosition(
+          monitor.position.x + 120,
+          monitor.position.y + 120,
+        ))
+      }
     }
 
     isRestored.value = true

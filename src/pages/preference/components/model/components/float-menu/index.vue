@@ -34,7 +34,7 @@ import { FloatButton, FloatButtonGroup } from 'antdv-next'
 
     <FloatButton
       :tooltip="$t('pages.preference.model.tooltips.moreModels')"
-      @click="openUrl('https://github.com/ayangweb/Awesome-BongoCat')"
+      @click="openUrl('https://github.com/yangpane/DogPet/releases')"
     >
       <template #icon>
         <UnorderedListOutlined />

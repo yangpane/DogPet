@@ -1,14 +1,14 @@
 {
-  "identifier": "com.ayangweb.BongoCat",
+  "identifier": "com.yangpanyi.DogPet",
   "bundle": {
     "linux": {
       "deb": {
         "depends": ["gstreamer1.0-plugins-good"],
-        "desktopTemplate": "./BongoCat.desktop"
+        "desktopTemplate": "./DogPet.desktop"
       },
       "rpm": {
         "depends": ["gstreamer1-plugins-good"],
-        "desktopTemplate": "./BongoCat.desktop"
+        "desktopTemplate": "./DogPet.desktop"
       }
     }
   }

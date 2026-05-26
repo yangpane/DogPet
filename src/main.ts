@@ -12,6 +12,9 @@ import 'antdv-next/dist/reset.css'
 import './assets/css/global.scss'
 
 const pinia = createPinia()
-pinia.use(createPlugin({ saveOnChange: true }))
+
+if ('__TAURI_INTERNALS__' in window) {
+  pinia.use(createPlugin({ saveOnChange: true }))
+}
 
 createApp(App).use(router).use(pinia).use(i18n).mount('#app')
