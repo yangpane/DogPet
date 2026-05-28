@@ -12,6 +12,7 @@ export type PetActivityEvent
     | 'inactive_timeout'
     | 'wake'
     | 'random_tick'
+    | 'space_press'
 
 export interface PetStateMachine {
   readonly current: PetStateId
@@ -54,6 +55,7 @@ export function createPetStateMachine(): PetStateMachine {
       case 'mouse_click':
       case 'mouse_move':
       case 'drag_start':
+      case 'space_press':
         setUserActive()
         break
       case 'drag_end':
@@ -110,12 +112,25 @@ export function createPetStateMachine(): PetStateMachine {
         return current
       }
 
+      if (event === 'space_press') {
+        setUserActive()
+        current = 'space'
+
+        return current
+      }
+
       if (current === 'random') {
         recordEvent(event)
 
         if (event === 'keyboard_active' || event === 'mouse_click' || event === 'mouse_move') {
           return settle()
         }
+
+        return current
+      }
+
+      if (current === 'space') {
+        recordEvent(event)
 
         return current
       }
@@ -155,7 +170,7 @@ export function createPetStateMachine(): PetStateMachine {
       }
     },
     finishOneShot() {
-      if (current !== 'click' && current !== 'random') return current
+      if (current !== 'click' && current !== 'random' && current !== 'space') return current
 
       return settle()
     },

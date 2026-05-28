@@ -1,6 +1,6 @@
 import { basename } from '@tauri-apps/api/path'
 
-export const PET_STATE_IDS = ['idle', 'typing', 'click', 'mouse', 'sleep', 'random'] as const
+export const PET_STATE_IDS = ['idle', 'typing', 'click', 'mouse', 'sleep', 'random', 'space'] as const
 
 export type PetStateId = typeof PET_STATE_IDS[number]
 
@@ -24,6 +24,7 @@ export const PET_STATE_LABELS: Record<PetStateId, string> = {
   mouse: '拖拽',
   sleep: '睡觉',
   random: '待机小动作',
+  space: '空格弹跳',
 }
 
 export function createDefaultPetPackage(): PetFramePackage {
@@ -34,7 +35,7 @@ export function createDefaultPetPackage(): PetFramePackage {
       id,
       frames: [],
       fps: 10,
-      loop: id !== 'click' && id !== 'random',
+      loop: id !== 'click' && id !== 'random' && id !== 'space',
     }
   }
 

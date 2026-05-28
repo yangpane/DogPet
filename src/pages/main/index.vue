@@ -18,6 +18,7 @@ import { hideWindow, setAlwaysOnTop, setTaskbarVisibility, showWindow } from '@/
 import { useCatStore } from '@/stores/cat'
 import { useGeneralStore } from '@/stores/general.ts'
 import { usePetFrameStore } from '@/stores/petFrame'
+import { isSpaceKey } from '@/utils/deviceKey'
 import { isWindows } from '@/utils/platform'
 
 interface MouseButtonEvent {
@@ -130,7 +131,13 @@ const currentFrameSrc = computed(() => {
 })
 const currentStateReady = computed(() => hasRenderableState(petFrameStore.pack, displayState.value))
 const activeOneShot = computed(() => {
-  if (petFrameStore.activeState !== 'click' && petFrameStore.activeState !== 'random') return false
+  if (
+    petFrameStore.activeState !== 'click'
+    && petFrameStore.activeState !== 'random'
+    && petFrameStore.activeState !== 'space'
+  ) {
+    return false
+  }
 
   return !activeAsset.value.loop
 })
@@ -185,6 +192,12 @@ useTauriListen<DeviceEvent>(LISTEN_KEY.DEVICE_CHANGED, ({ payload }) => {
   resetInactiveTimer()
 
   if (payload.kind === 'KeyboardPress') {
+    if (isSpaceKey(payload.value)) {
+      setPetState(machine.send('space_press'))
+
+      return
+    }
+
     setPetState(machine.send('keyboard_active'))
 
     clearTimeout(keyboardIdleTimer)

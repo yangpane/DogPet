@@ -29,6 +29,7 @@ const DEMO_DOG_FRAMES: Record<PetStateId, string[]> = {
   mouse: createDemoFrames('drag-loop-hit', 6),
   sleep: createDemoFrames('sleep-hit', 6),
   random: createDemoFrames('random-hit', 9),
+  space: createDemoFrames('space-hit', 8),
 }
 
 const DEMO_DOG_OPTIONS: Record<PetStateId, { fps: number, loop: boolean }> = {
@@ -38,6 +39,7 @@ const DEMO_DOG_OPTIONS: Record<PetStateId, { fps: number, loop: boolean }> = {
   mouse: { fps: 10, loop: true },
   sleep: { fps: 6, loop: true },
   random: { fps: 10, loop: false },
+  space: { fps: 12, loop: false },
 }
 
 export const usePetFrameStore = defineStore('pet-frame', () => {
@@ -94,6 +96,13 @@ export const usePetFrameStore = defineStore('pet-frame', () => {
     let changed = false
 
     for (const [stateId, demoFrames] of Object.entries(DEMO_DOG_FRAMES) as [PetStateId, string[]][]) {
+      states[stateId] ??= {
+        id: stateId,
+        frames: [],
+        fps: DEMO_DOG_OPTIONS[stateId].fps,
+        loop: DEMO_DOG_OPTIONS[stateId].loop,
+      }
+
       const currentFrames = states[stateId].frames
       const expectedDemoDir = demoFrames[0]?.match(/\/pet-preview\/([^/]+)\//)?.[1]
       const hasFrames = currentFrames.length > 0

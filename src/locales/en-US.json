@@ -9,9 +9,9 @@
     "preference": {
       "title": "Preferences",
       "cat": {
-        "title": "Cat",
+        "title": "Pet",
         "labels": {
-          "modelSettings": "Model Settings",
+          "modelSettings": "Pet Display",
           "mirrorMode": "Mirror Mode",
           "mouseMirror": "Mouse Mirror",
           "ignoreMouse": "Ignore Mouse Events",
@@ -29,7 +29,7 @@
           "maxFPS": "Max Frame Rate"
         },
         "hints": {
-          "mirrorMode": "When enabled, the model will be mirrored horizontally.",
+          "mirrorMode": "When enabled, the pet will be mirrored horizontally.",
           "mouseMirror": "When enabled, the mouse will mirror the hand movement.",
           "ignoreMouse": "When enabled, the model will not respond to mouse events. Useful for keyboard mode or gamepad mode.",
           "motionSound": "When enabled, the model will play corresponding sound effects when performing actions (if they exist).",
@@ -115,18 +115,18 @@
       "shortcut": {
         "title": "Shortcuts",
         "labels": {
-          "toggleCat": "Toggle Cat",
+          "toggleCat": "Show/Hide Pet",
           "togglePreferences": "Toggle Preferences",
           "mirrorMode": "Mirror Mode",
           "passThrough": "Pass Through",
           "alwaysOnTop": "Always on Top"
         },
         "hints": {
-          "toggleCat": "Toggle the visibility of the cat window.",
+          "toggleCat": "Toggle the visibility of the pet window.",
           "togglePreferences": "Toggle the visibility of the preferences window.",
-          "mirrorMode": "Toggle the cat's mirror mode.",
-          "passThrough": "Toggle whether the cat window is pass-through.",
-          "alwaysOnTop": "Toggle whether the cat window stays on top."
+          "mirrorMode": "Toggle the pet's mirror mode.",
+          "passThrough": "Toggle whether the pet window is pass-through.",
+          "alwaysOnTop": "Toggle whether the pet window stays on top."
         }
       },
       "about": {
@@ -178,8 +178,8 @@
     "useAppMenu": {
       "labels": {
         "preference": "Preferences...",
-        "hideCat": "Hide Cat",
-        "showCat": "Show Cat",
+        "hideCat": "Hide Pet",
+        "showCat": "Show Pet",
         "passThrough": "Pass Through",
         "windowSize": "Window Size",
         "opacity": "Opacity",

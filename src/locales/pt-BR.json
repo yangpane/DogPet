@@ -9,9 +9,9 @@
     "preference": {
       "title": "Preferências",
       "cat": {
-        "title": "Gato",
+        "title": "Pet",
         "labels": {
-          "modelSettings": "Configurações do Modelo",
+          "modelSettings": "Exibição do Pet",
           "mirrorMode": "Modo Espelho",
           "mouseMirror": "Espelho do Mouse",
           "ignoreMouse": "Ignorar Eventos do Mouse",
@@ -29,7 +29,7 @@
           "maxFPS": "Taxa Máxima de Quadros"
         },
         "hints": {
-          "mirrorMode": "Quando ativado, o modelo será invertido horizontalmente.",
+          "mirrorMode": "Quando ativado, o pet será invertido horizontalmente.",
           "mouseMirror": "Quando ativado, o mouse espelhará o movimento da mão.",
           "ignoreMouse": "Quando ativado, o modelo não responderá a eventos do mouse. Útil para o modo teclado ou modo controle.",
           "motionSound": "Quando ativado, o modelo reproduzirá efeitos sonoros correspondentes ao executar ações (se existirem).",
@@ -115,18 +115,18 @@
       "shortcut": {
         "title": "Atalhos",
         "labels": {
-          "toggleCat": "Mostrar/Ocultar Gato",
+          "toggleCat": "Mostrar/Ocultar Pet",
           "togglePreferences": "Abrir Preferências",
           "mirrorMode": "Modo Espelho",
           "passThrough": "Janela Transparente",
           "alwaysOnTop": "Sempre no Topo"
         },
         "hints": {
-          "toggleCat": "Alternar a visibilidade da janela do gato.",
+          "toggleCat": "Alternar a visibilidade da janela do pet.",
           "togglePreferences": "Alternar a visibilidade da janela de preferências.",
-          "mirrorMode": "Alternar o modo espelho do gato.",
-          "passThrough": "Alternar se a janela do gato é clicável.",
-          "alwaysOnTop": "Alternar se a janela do gato permanece no topo."
+          "mirrorMode": "Alternar o modo espelho do pet.",
+          "passThrough": "Alternar se a janela do pet é clicável.",
+          "alwaysOnTop": "Alternar se a janela do pet permanece no topo."
         }
       },
       "about": {
@@ -178,8 +178,8 @@
     "useAppMenu": {
       "labels": {
         "preference": "Preferências...",
-        "hideCat": "Ocultar Gato",
-        "showCat": "Mostrar Gato",
+        "hideCat": "Ocultar Pet",
+        "showCat": "Mostrar Pet",
         "passThrough": "Janela Transparente",
         "windowSize": "Tamanho da Janela",
         "opacity": "Opacidade",

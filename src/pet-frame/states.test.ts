@@ -11,10 +11,10 @@ import {
 } from './states'
 
 describe('pet frame package', () => {
-  it('requires all six fixed states to have at least one image frame', () => {
+  it('requires all fixed states to have at least one image frame', () => {
     const pack = createDefaultPetPackage()
 
-    assert.deepEqual(PET_STATE_IDS, ['idle', 'typing', 'click', 'mouse', 'sleep', 'random'])
+    assert.deepEqual(PET_STATE_IDS, ['idle', 'typing', 'click', 'mouse', 'sleep', 'random', 'space'])
     assert.equal(isPetPackageComplete(pack), false)
 
     for (const stateId of PET_STATE_IDS) {

@@ -1111,7 +1111,7 @@ dependencies = [
 
 [[package]]
 name = "dogpet"
-version = "1.1.1"
+version = "1.2.0"
 dependencies = [
  "fs_extra",
  "gilrs",

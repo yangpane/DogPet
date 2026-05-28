@@ -8,6 +8,7 @@ const demoFrameCounts: Record<string, number> = {
   mouse: 12,
   sleep: 6,
   random: 9,
+  space: 8,
 }
 
 function getFrameCount(stateId: string) {

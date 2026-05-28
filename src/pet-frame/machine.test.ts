@@ -95,4 +95,39 @@ describe('pet state machine', () => {
     assert.equal(machine.send('drag_start'), 'mouse')
     assert.equal(machine.send('drag_end'), 'idle')
   })
+
+  it('plays space as a one-shot action and then returns to idle', () => {
+    const machine = createPetStateMachine()
+
+    assert.equal(machine.send('space_press'), 'space')
+    assert.equal(machine.finishOneShot(), 'idle')
+  })
+
+  it('records normal typing during space and settles to typing after the jump', () => {
+    const machine = createPetStateMachine()
+
+    assert.equal(machine.send('space_press'), 'space')
+    assert.equal(machine.send('keyboard_active'), 'space')
+    assert.equal(machine.finishOneShot(), 'typing')
+    assert.equal(machine.send('keyboard_idle'), 'idle')
+  })
+
+  it('lets space interrupt random and wake from sleep', () => {
+    const machine = createPetStateMachine()
+
+    assert.equal(machine.send('random_tick'), 'random')
+    assert.equal(machine.send('space_press'), 'space')
+    assert.equal(machine.finishOneShot(), 'idle')
+    assert.equal(machine.send('inactive_timeout'), 'sleep')
+    assert.equal(machine.send('space_press'), 'space')
+    assert.equal(machine.finishOneShot(), 'idle')
+  })
+
+  it('keeps drag visually locked over space', () => {
+    const machine = createPetStateMachine()
+
+    assert.equal(machine.send('drag_start'), 'mouse')
+    assert.equal(machine.send('space_press'), 'mouse')
+    assert.equal(machine.send('drag_end'), 'idle')
+  })
 })

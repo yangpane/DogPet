@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
-import { Flex, Spin } from 'antdv-next'
+import { Flex } from 'antdv-next'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -8,7 +8,6 @@ import UpdateApp from '@/components/update-app/index.vue'
 import { useTray } from '@/composables/useTray'
 import { useAppStore } from '@/stores/app'
 import { useGeneralStore } from '@/stores/general'
-import { useModelStore } from '@/stores/model'
 import { isMac } from '@/utils/platform'
 
 import About from './components/about/index.vue'
@@ -22,7 +21,6 @@ const appStore = useAppStore()
 const current = ref(0)
 const { t } = useI18n()
 const generalStore = useGeneralStore()
-const modelStore = useModelStore()
 const appWindow = getCurrentWebviewWindow()
 
 watch(() => generalStore.appearance.language, () => {
@@ -33,7 +31,7 @@ const menus = computed(() => [
   {
     key: 'cat',
     label: t('pages.preference.cat.title'),
-    icon: 'i-solar:cat-bold',
+    icon: 'i-lucide:dog',
     component: Cat,
   },
   {
@@ -64,14 +62,6 @@ const menus = computed(() => [
 </script>
 
 <template>
-  <Spin
-    class="max-h-unset!"
-    :description="t('pages.main.hints.switching')"
-    fullscreen
-    size="large"
-    :spinning="!modelStore.modelReady"
-  />
-
   <Flex class="h-screen">
     <div
       class="h-full w-30 flex flex-col items-center gap-4 overflow-auto bg-gradient-from-blue-1 bg-gradient-to-black/1 bg-gradient-linear dark:bg-none"
